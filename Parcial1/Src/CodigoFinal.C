@@ -139,11 +139,11 @@ int main(void)
     GPIOA->MODER &= ~(0b11 << 10); // Limpiar los bits correspondientes
     GPIOA->MODER |= portA_masks_output;
 
-    struct Time_t alarma0 = {0, 8, 0, 0, 0, 0}; // Alarma configurada para las 08:00:00 AM
-    struct Time_t alarma2 = {0, 8, 0, 0, 0, 2}; // Alarma configurada para las 08:00:00 AM
-    struct Time_t alarma4 = {0, 8, 0, 0, 0, 4}; // Alarma configurada para las 08:00:00 AM
+    struct Time_t alarma0 = {0, 1, 0, 0, 0, 0}; // Alarma configurada para las 08:00:00 AM
+    struct Time_t alarma2 = {0, 1, 0, 0, 0, 2}; // Alarma configurada para las 08:00:00 AM
+    struct Time_t alarma4 = {0, 1, 0, 0, 0, 4}; // Alarma configurada para las 08:00:00 AM
 
-    set_time(0, 8, 5, 9, 5, 3); // 1:05:45 PM
+    set_time(0, 0, 5, 0, 0, 0); // 1:05:45 PM
 
     while (1)
     {
@@ -369,7 +369,6 @@ void formato_hora()
 
     delay_ms(1);
     inc_second++;
-
     if (inc_second == 100) {
         inc_second = 0; // Reiniciar el contador de milisegundos
         watch.second_unit++; // Incrementar las unidades de segundo
@@ -390,34 +389,18 @@ void formato_hora()
                         watch.minute_decimal = 0; // Reiniciar las decenas de minuto a cero
                         watch.hour_unit++; // Incrementar las unidades de hora
 
-                        if (formato_24_horas == 1) {
-                            // Si es 12:59:00, ajustar a 01:00:00 (AM o PM)
-                            if (watch.hour_decimal == 1 && watch.hour_unit == 2 && watch.minute_unit == 5 && watch.minute_decimal == 9) {
-                                if (watch.hour_unit == 2) {
-                                    // Si es 12:59:00 PM, cambiar a 01:00:00 AM
-                                    if (watch.hour_decimal == 2) {
-                                        watch.hour_decimal = 1; // AM
-                                    } else {
-                                        // Si es 12:59:00 AM, cambiar a 01:00:00 PM
-                                        watch.hour_decimal = 2; // PM
-                                    }
-                                }
-                                watch.hour_unit = 0; // 1
-                                watch.minute_unit = 0; // 0
-                                watch.minute_decimal = 0; // 0
-                            }
-                            // Si las horas llegan a 13, cambiar de PM a AM y reiniciar a 1:00
-                            else if (watch.hour_unit == 3) {
-                                watch.hour_decimal = 0; // AM
-                                watch.hour_unit = 1; // 1
-                            }
-                            // Si las horas llegan a 12, cambiar de AM a PM
-                            else if (watch.hour_unit == 2 && watch.hour_decimal == 1) {
-                                watch.hour_decimal = 2; // PM
-                            }
-                            // Si las horas llegan a 12 (mediodía), cambiar de AM a PM
-                            else if (watch.hour_unit == 2 && watch.hour_decimal == 0) {
-                                watch.hour_decimal = 2; // PM
+                        if (watch.hour_unit == 10) {
+                            watch.hour_unit = 0; // Reiniciar las unidades de hora a cero
+                            watch.hour_decimal++; // Incrementar las decenas de hora
+
+                            if (watch.hour_decimal == 2 && watch.hour_unit == 4) {
+                                // Si las horas llegan a 24 en formato de 24 horas, reiniciar a 00
+                                watch.hour_decimal = 0;
+                                watch.hour_unit = 0;
+                            } else if (watch.hour_decimal == 1 && watch.hour_unit == 3) {
+                                // Si las horas llegan a 13, ajustar a 01 en formato de 24 horas
+                                watch.hour_decimal = 0;
+                                watch.hour_unit = 1;
                             }
                         }
                     }
@@ -425,6 +408,7 @@ void formato_hora()
             }
         }
     }
+
 }
 
 void delay_ms(uint16_t n)
