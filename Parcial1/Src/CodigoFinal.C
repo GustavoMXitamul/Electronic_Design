@@ -211,6 +211,7 @@ int main(void)
                 if (watch.minute_decimal == 6)
                 {
                     watch.minute_decimal = 0; // Reiniciar las decenas de minuto a cero
+                    watch.hour_unit++; // Incrementar las decenas de minuto
                 }
             }
 
