@@ -1,0 +1,5 @@
+../Src/PruebasMain.c:82:6:set_time	24	static
+../Src/PruebasMain.c:91:5:main	80	static
+../Src/PruebasMain.c:309:6:formato_hora	8	static
+../Src/PruebasMain.c:430:6:delay_ms	24	static,ignoring_inline_asm
+../Src/PruebasMain.c:443:9:decoder	16	static
