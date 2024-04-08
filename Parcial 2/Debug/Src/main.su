@@ -1,0 +1,7 @@
+../Src/main.c:67:9:get_number_from_key	16	static
+../Src/main.c:83:9:get_key_from_number	16	static
+../Src/main.c:99:5:main	120	static
+../Src/main.c:338:6:delay_ms	24	static,ignoring_inline_asm
+../Src/main.c:345:6:update_display_values	8	static
+../Src/main.c:389:9:decoder	24	static
+../Src/main.c:409:6:decimal_decoder	16	static
