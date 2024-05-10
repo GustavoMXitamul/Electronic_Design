@@ -1,0 +1,12 @@
+../Src/timer_demo1.c:81:9:get_number_from_key	12
+../Src/timer_demo1.c:97:9:get_key_from_number	11
+../Src/timer_demo1.c:113:5:main	8
+../Src/timer_demo1.c:489:6:delay_ms	3
+../Src/timer_demo1.c:498:6:update_display_values	5
+../Src/timer_demo1.c:543:9:decoder	12
+../Src/timer_demo1.c:563:6:decimal_decoder	2
+../Src/timer_demo1.c:574:9:USART2_read	2
+../Src/timer_demo1.c:580:6:USART2_write	2
+../Src/timer_demo1.c:586:6:USART2_putstring	2
+../Src/timer_demo1.c:595:6:USART2_putstring_E	2
+../Src/timer_demo1.c:607:6:USART2_getstring	4

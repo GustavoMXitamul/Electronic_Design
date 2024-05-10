@@ -1,0 +1,4 @@
+"./Src/syscalls.o"
+"./Src/sysmem.o"
+"./Src/timer_demo1.o"
+"./Startup/startup_stm32l053r8tx.o"
